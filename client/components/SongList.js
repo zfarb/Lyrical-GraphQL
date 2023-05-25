@@ -38,11 +38,13 @@ class SongList extends Component {
     }
 }
 
-// const mutation = gql`
-//     mutation DeleteSong($id: ID) {
-//         deleteSong(id: $id) {}
-//     }
-// `;
+const mutation = gql`
+    mutation DeleteSong($id: ID) {
+        deleteSong(id: $id) {
+            id
+        }
+    }
+`;
 
-// CURRIED FUNCTION OR HOC THAT CONNECTS OUR DEFINED fetchSongs TO THE SongList COMPONENT
-export default graphql(fetchSongs)(SongList);
+// CURRIED FUNCTION OR HOC THAT CONNECTS OUR DEFINED mutation TO THE SECOND CURRIED FUNCTION OR HOC WHICH CONNECTS OUR DEFINED fetchSongs TO THE SongList COMPONENT
+export default graphql(mutation)(graphql(fetchSongs)(SongList));
