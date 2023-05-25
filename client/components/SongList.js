@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
+import { Link } from 'react-router';
 
 class SongList extends Component {
     renderSongs() {
@@ -22,7 +23,17 @@ class SongList extends Component {
             return <div>Songs</div>;
         }
 
-        return <ul className="collection">{this.renderSongs()}</ul>;
+        return (
+            <div>
+                <ul className="collection">{this.renderSongs()}</ul>
+                <Link
+                    to="/song/new"
+                    className="btn-floating btn-large red right"
+                >
+                    <i className="material-icons">add</i>
+                </Link>
+            </div>
+        );
     }
 }
 
@@ -36,4 +47,5 @@ const query = gql`
     }
 `;
 
-export default graphql(query)(SongList); // CURRIED FUNCTION
+// CURRIED FUNCTION OR HOC THAT CONNECTS OUR DEFINED query TO THE SongList COMPONENT
+export default graphql(query)(SongList);
