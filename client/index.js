@@ -8,7 +8,7 @@ const client = new ApolloClient({});
 
 const Root = () => {
     return (
-        // ApolloProvider allows app to use Apollo
+        // ApolloProvider allows app to use GraphQL
         <ApolloProvider client={client}>
             <div>
                 <SongList />
