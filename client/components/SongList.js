@@ -8,7 +8,7 @@ class SongList extends Component {
     onSongDelete(id) {
         const { mutate } = this.props;
 
-        // TELL GRAPHQL TO USE id WHCIH IN THIS CASE IS THE SONG ID FOR THE id QUERY VARIABLE AND REFETCH THE songs QUERY
+        // TELL GRAPHQL TO USE id WHCIH IN THIS CASE IS THE SONG ID FOR THE id QUERY VARIABLE AND REFETCH THE songs QUERY. WE ARE ABLE TO USE THIS METHOD FOR REFETCHING BECAUSE THIS COMPONENT HAS ACCESS TO THE fetchSongs QUERY
         mutate({
             variables: { id }
         }).this.props.data.refetch();
