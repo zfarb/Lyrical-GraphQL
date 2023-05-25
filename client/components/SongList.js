@@ -10,9 +10,8 @@ class SongList extends Component {
 
         // TELL GRAPHQL TO USE id WHCIH IN THIS CASE IS THE SONG ID FOR THE id QUERY VARIABLE AND REFETCH THE songs QUERY
         mutate({
-            variables: { id },
-            refetchQueries: [{ query: fetchSongs }]
-        });
+            variables: { id }
+        }).this.props.data.refetch();
     }
 
     renderSongs() {
