@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Link } from 'react-router';
+import { Link, hashHistory } from 'react-router';
+import fetchSongs from '../../queries/fetchSongs';
 
 class SongCreate extends Component {
     constructor(props) {
@@ -15,12 +16,13 @@ class SongCreate extends Component {
 
         const { mutate } = this.props;
 
-        // TELL GRAPHQL TO USE this.state.title FOR THE title QUERY VARIABLE
+        // TELL GRAPHQL TO USE this.state.title FOR THE title QUERY VARIABLE, REFETCH THE songs QUERY AND THEN NAVIGATE TO THE ROOT ROUTE ('/') AFTER COMPLETION
         mutate({
             variables: {
-                title: this.state.title
+                title: this.state.title,
+                refetchQueries: [{ query: fetchSongs }]
             }
-        });
+        }).then(() => hashHistory.push('/'));
     }
 
     render() {
@@ -31,6 +33,7 @@ class SongCreate extends Component {
                 <form onSubmit={this.onSubmit.bind(this)}>
                     <label>Song Title: </label>
                     <input
+                        type="text"
                         onChange={(event) =>
                             this.setState({ title: event.target.value })
                         }
