@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import { Link } from 'react-router';
 import fetchSongs from '../../queries/fetchSongs';
+import gql from 'graphql-tag';
 
 class SongList extends Component {
     renderSongs() {
@@ -36,6 +37,12 @@ class SongList extends Component {
         );
     }
 }
+
+// const mutation = gql`
+//     mutation DeleteSong($id: ID) {
+//         deleteSong(id: $id) {}
+//     }
+// `;
 
 // CURRIED FUNCTION OR HOC THAT CONNECTS OUR DEFINED fetchSongs TO THE SongList COMPONENT
 export default graphql(fetchSongs)(SongList);

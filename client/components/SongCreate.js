@@ -19,9 +19,9 @@ class SongCreate extends Component {
         // TELL GRAPHQL TO USE this.state.title FOR THE title QUERY VARIABLE, REFETCH THE songs QUERY AND THEN NAVIGATE TO THE ROOT ROUTE ('/') AFTER COMPLETION
         mutate({
             variables: {
-                title: this.state.title,
-                refetchQueries: [{ query: fetchSongs }]
-            }
+                title: this.state.title
+            },
+            refetchQueries: [{ query: fetchSongs }]
         }).then(() => hashHistory.push('/'));
     }
 
@@ -49,7 +49,6 @@ class SongCreate extends Component {
 const mutation = gql`
     mutation AddSong($title: String) {
         addSong(title: $title) {
-            id
             title
         }
     }
