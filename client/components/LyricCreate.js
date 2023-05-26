@@ -20,6 +20,8 @@ class LyricCreate extends Component {
                 songId: this.props.songId
             }
         });
+
+        this.setState({ content: '' });
     }
 
     render() {
