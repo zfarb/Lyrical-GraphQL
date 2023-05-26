@@ -11,7 +11,7 @@ class SongList extends Component {
         // TELL GRAPHQL TO USE id WHCIH IN THIS CASE IS THE SONG ID FOR THE id QUERY VARIABLE AND REFETCH THE songs QUERY. WE ARE ABLE TO USE THIS METHOD FOR REFETCHING BECAUSE THIS COMPONENT HAS ACCESS TO THE fetchSongs QUERY
         mutate({
             variables: { id }
-        }).this.props.data.refetch();
+        }).then(() => this.props.data.refetch());
     }
 
     renderSongs() {
@@ -20,7 +20,7 @@ class SongList extends Component {
         return songs.map(({ id, title }) => {
             return (
                 <li key={id} className="collection-item">
-                    {title}
+                    <Link to={`/song/${id}`}>{title}</Link>
                     <i
                         className="material-icons"
                         onClick={() => this.onSongDelete(id)}
