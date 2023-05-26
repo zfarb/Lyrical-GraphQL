@@ -4,6 +4,7 @@ import { graphql } from 'react-apollo';
 import { Link } from 'react-router';
 import LyricCreate from './LyricCreate';
 import LyricList from './LyricList';
+import fetchSong from '../../queries/fetchSong';
 
 class SongDetail extends Component {
     render() {
@@ -21,17 +22,8 @@ class SongDetail extends Component {
     }
 }
 
-// DEFINE A QUERY THAT RETURNS DATA FOR A SONG WITH GIVEN ID
-const query = gql`
-    query Song($id: ID!) {
-        song(id: $id) {
-            title
-        }
-    }
-`;
-
 // CURRIED FUNCTION OR HOC THAT CONNECTS OUR DEFINED query TO THE SongDetail COMPONENT AND TELLS query TO USE props.params.id FOR THE id QUERY VARIABLE
-export default graphql(query, {
+export default graphql(fetchSong, {
     options: (props) => {
         return { variables: { id: props.params.id } };
     }
