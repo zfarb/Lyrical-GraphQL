@@ -4,9 +4,12 @@ import { graphql } from 'react-apollo';
 
 class SongDetail extends Component {
     render() {
+        const { song } = this.props.data;
+
         return (
             <div>
                 <h3>Song Details</h3>
+                <h5>{song && song.title}</h5>
             </div>
         );
     }
@@ -21,5 +24,9 @@ const query = gql`
     }
 `;
 
-// CURRIED FUNCTION OR HOC THAT CONNECTS OUR DEFINED query TO THE SongDetail COMPONENT
-export default graphql(query)(SongDetail);
+// CURRIED FUNCTION OR HOC THAT CONNECTS OUR DEFINED query TO THE SongDetail COMPONENT AND TELLS query TO USE props.params.id FOR THE id QUERY VARIABLE
+export default graphql(query, {
+    options: (props) => {
+        return { variables: { id: props.params.id } };
+    }
+})(SongDetail);
