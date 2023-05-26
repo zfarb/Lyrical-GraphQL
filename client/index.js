@@ -9,7 +9,10 @@ import SongList from './components/SongList';
 import SongCreate from './components/SongCreate';
 import SongDetail from './components/SongDetail';
 
-const client = new ApolloClient({}); // STORES ALL THE DATA OBTAINED BY GRAPHQL
+// STORES ALL THE DATA OBTAINED BY GRAPHQL AND TELLS APOLLO TO USE CACHING WITH dataIdFromObject. ALL QUERIES AND MUTATION MUST RETURN ID TO BE CHECKED
+const client = new ApolloClient({
+    dataIdFromObject: (o) => o.id
+});
 
 const Root = () => {
     return (
