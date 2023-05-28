@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
+import gql from 'graphql-tag';
+import { graphql } from 'apollo-client';
 
 class LyricList extends Component {
+    onLike(id) {
+        const { mutate } = this.props;
+
+        mutate({ variables: { id } });
+    }
+
     renderLyrics() {
         const { lyrics } = this.props;
 
@@ -8,6 +16,12 @@ class LyricList extends Component {
             return (
                 <li key={id} className="collection-item">
                     {content}
+                    <i
+                        className="material-icons"
+                        onClick={() => this.onLike(id)}
+                    >
+                        thumb_up
+                    </i>
                 </li>
             );
         });
@@ -18,4 +32,13 @@ class LyricList extends Component {
     }
 }
 
-export default LyricList;
+const mutation = gql`
+    mutation LikeLyric($id: ID) {
+        likeLyric(id: $id) {
+            id
+            likes
+        }
+    }
+`;
+
+export default graphql(mutation)(LyricList);
